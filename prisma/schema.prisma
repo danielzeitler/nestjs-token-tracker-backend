@@ -29,8 +29,6 @@ model User {
 
   NFTs IDs[]
   Gifts Gift[]
-
-  @@map("users")
 }
 
 enum Item {
@@ -45,7 +43,6 @@ model Gift {
   size String
   userId String
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  @@map("Gifts")
 }
 
 model IDs {
