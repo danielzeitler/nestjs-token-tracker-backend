@@ -7,10 +7,6 @@ export class UserService {
     private prismaService: PrismaService,
   ) {}
 
-  async redeem() {
-    return 'hello from redeem';
-  }
-
   async create(dto) {
     const { email } = dto;
     return await this.prismaService.user.create({

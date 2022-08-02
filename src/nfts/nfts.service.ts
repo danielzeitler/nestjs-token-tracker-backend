@@ -18,9 +18,22 @@ export class NFTService {
   }
 
   async ownedByUser(userId) {
+    const { userId: id } = userId;
     return await this.prismaService.iDs.findMany({
       where: {
-        userId,
+        userId: id,
+      },
+    });
+  }
+
+  async redeemToken(id) {
+    const { tokenId } = id;
+
+    return this.prismaService.iDs.findFirst({
+      where: {
+        nft: {
+          equals: parseInt(tokenId),
+        },
       },
     });
   }

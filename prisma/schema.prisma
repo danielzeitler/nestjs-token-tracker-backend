@@ -7,6 +7,19 @@ datasource db {
   url = env("DATABASE_URL")
 }
 
+// CONTACT
+// E-Mail
+// Discord ID
+// Country Region
+// Shipping
+// First Name
+// Last Name
+// Address line 1
+// Address line 2
+// City
+// Province/State
+// Zip/Postal Code
+
 model User {
   id String @id @default(uuid())
   createdAt DateTime @default(now())
@@ -15,8 +28,24 @@ model User {
   email String @unique
 
   NFTs IDs[]
+  Gifts Gift[]
 
   @@map("users")
+}
+
+enum Item {
+  TSHIRT
+  SOCKS
+}
+
+// Size
+model Gift {
+  id Int @id @default(autoincrement())
+  itemType Item @default(TSHIRT)
+  size String
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("Gifts")
 }
 
 model IDs {

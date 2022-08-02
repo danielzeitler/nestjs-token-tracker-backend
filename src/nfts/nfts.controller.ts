@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  NotFoundException,
   Post,
 } from '@nestjs/common';
 import { NFTDto } from './dto';
@@ -17,8 +18,17 @@ export class NFTController {
   }
 
   @Get('/ownedbyuser')
-  ownedByUser(userId: string) {
+  ownedByUser(@Body() userId: string) {
     return this.userService.ownedByUser(userId);
+  }
+
+  @Post('/redeemed')
+  redeemToken(@Body() id: number) {
+    try {
+      return this.userService.redeemToken(id);
+    } catch (e) {
+      throw new NotFoundException('ID Not Found');
+    }
   }
 
   @Get('/all')
